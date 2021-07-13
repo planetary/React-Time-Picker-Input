@@ -28,7 +28,8 @@ function TimeInput(props) {
     hour12Format,
     value,
     onChange,
-    allowDelete
+    allowDelete,
+    onFocus
   } = props;
   const [isMobile, setIsMobile] = (0, _react.useState)((0, _actions.isOnMobileDevice)());
   const dateParts = (0, _actions.getDatePartsByProps)(value, hour12Format);
@@ -97,7 +98,8 @@ function TimeInput(props) {
   }, /*#__PURE__*/_react.default.createElement("input", {
     type: "time",
     value: valueMobile,
-    onChange: e => setValueMobile(e.target.value)
+    onChange: e => setValueMobile(e.target.value),
+    onFocus: onFocus
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_InputTimeHelper.default, {
     inputRef: hourRef,
     value: hour,
@@ -106,7 +108,8 @@ function TimeInput(props) {
     allowDelete: allowDelete,
     moveNext: focusMinute,
     range: hourRange,
-    toggleAmPm: toggleAmPm
+    toggleAmPm: toggleAmPm,
+    onFocus: onFocus
   }), /*#__PURE__*/_react.default.createElement(_InputTimeHelper.default, {
     inputRef: minuteRef,
     value: minute,
@@ -118,7 +121,8 @@ function TimeInput(props) {
     range: {
       start: 0,
       end: 59
-    }
+    },
+    onFocus: onFocus
   }), hour12Format && /*#__PURE__*/_react.default.createElement("div", {
     className: "inputWrapper"
   }, /*#__PURE__*/_react.default.createElement(_AmPmInputHelper.default, {
@@ -127,7 +131,8 @@ function TimeInput(props) {
     movePrev: focusMinute,
     moveNext: () => blurElementByRef(amPmRef),
     toggleAmPm: toggleAmPm,
-    setAmPM: amPm => _setAmPM(amPm)
+    setAmPM: amPm => _setAmPM(amPm),
+    onFocus: onFocus
   })))));
 }
 

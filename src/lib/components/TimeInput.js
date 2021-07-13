@@ -4,7 +4,7 @@ import AmPmInputHelper from "./AmPmInputHelper";
 import { doubleChar, isOnMobileDevice, getDatePartsByProps } from "./actions";
 
 function TimeInput(props) {
-  const { hour12Format, value, onChange, allowDelete } = props;
+  const { hour12Format, value, onChange, allowDelete, onFocus } = props;
   const [isMobile, setIsMobile] = useState(isOnMobileDevice());
 
   const dateParts = getDatePartsByProps(value,hour12Format);
@@ -66,7 +66,7 @@ function TimeInput(props) {
       <div className="react-time-input-picker">
           {isMobile ? (
             <div className="input-time-mobile">
-              <input type="time" value={valueMobile} onChange={(e) => setValueMobile(e.target.value)} />
+              <input type="time" value={valueMobile} onChange={(e) => setValueMobile(e.target.value)} onFocus={onFocus} />
             </div>
           ) : (
             <React.Fragment>
@@ -79,6 +79,7 @@ function TimeInput(props) {
                 moveNext={focusMinute}
                 range={hourRange}
                 toggleAmPm={toggleAmPm}
+                onFocus={onFocus}
               />
               <InputTimeHelper
                 inputRef={minuteRef}
@@ -89,6 +90,7 @@ function TimeInput(props) {
                 moveNext={hour12Format ? () => focusElementByRef(amPmRef) : () => blurElementByRef(minuteRef)}
                 movePrev={() => focusElementByRef(hourRef)}
                 range={{ start: 0, end: 59 }}
+                onFocus={onFocus}
               />
               {hour12Format && (
                 <div className="inputWrapper">
@@ -99,6 +101,7 @@ function TimeInput(props) {
                     moveNext={()=> blurElementByRef(amPmRef)}
                     toggleAmPm={toggleAmPm}
                     setAmPM={(amPm) => setAmPM(amPm)}
+                    onFocus={onFocus}
                   />
                 </div>
               )}
